@@ -49,12 +49,18 @@ Point HuskySTD::getPointFromRectInt(int position, Point rect)
 				return { (float)j, (float)i };
 			}
 		}
-		if (c < position) {
-			c++;
-		}
-		else {
-			return { (float)j, (float)i };
-		}
 	}
 	return { -1, -1 };
 }
+
+
+/*
+int* HuskySTD::genCardinalArray(int max)
+{
+	int* arr = new int[max];
+	for (int i = 0; i < max; i++) {
+		arr[i] = i;
+	}
+	return arr;
+}
+*/

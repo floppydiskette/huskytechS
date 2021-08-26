@@ -11,6 +11,8 @@ public:
 	Map(Camera* camera, TileRenderer* tileren, int width = 10, int height = 10);
 	~Map();
 
+	void setTile(Point pos, TileType tile);
+
 	void Render(Point offset);
 
 	void explode();

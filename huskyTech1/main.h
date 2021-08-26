@@ -11,6 +11,7 @@
 #include "TileRenderer.h"
 #include "Map.h"
 #include "Camera.h"
+#include "MapGenerator.h"
 
 
 bool alive = false;
