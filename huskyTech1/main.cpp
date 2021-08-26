@@ -152,10 +152,11 @@ bool init() {
 				camera = new Camera({ 0,0 });
 
 				//this is debug stuffz
-				az_ch = new Character(new Sprite("data/character_ss.png", ht_renderer, 4, 3), {25, 25});
+				az_ch = new Character(new Sprite("data/character_ss.png", ht_renderer, 4, 3), {50 * TILESIZE, 50 * TILESIZE});
 				tile_ren = new TileRenderer(ht_renderer, 4);
 				tile_ren->RegisterTexture(TileType::GRASS, "data/grass_t.png");
 				tile_ren->RegisterTexture(TileType::STONE, "data/stone_t.png");
+				tile_ren->RegisterTexture(TileType::DEV1, "data/dev_t.png");
 				mp = MapGenerator::generateMap(camera, tile_ren);
 
 

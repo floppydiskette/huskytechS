@@ -16,7 +16,12 @@ public:
 	static Point mulPointFloat(Point a, float b);
 
 	static Point addPointPoint(Point a, Point b);
+	static Point subPointPoint(Point a, Point b);
 	static Point addPointFloat(Point a, float b);
+
+	static Point floorPoint(Point a);
+
+	static float pointDotProduct(Point a, Point b);
 	
 };
 

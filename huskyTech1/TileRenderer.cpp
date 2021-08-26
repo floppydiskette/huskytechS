@@ -51,12 +51,15 @@ void TileRenderer::RegisterTexture(TileType tile, const char* filename)
 void TileRenderer::Draw(TileType tile, Point position)
 {
 	if (tile > max_textures) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "HECK!", "TILE NUMBER GREATER THAN ALLOCATED!", NULL);
-		return;
+		//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "HECK!", "TILE NUMBER GREATER THAN ALLOCATED!", NULL);
+		//return;
+
+		tile = TileType::DEV1;
 	}
 	if (tile < 0) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "HECK!", "TILE NUMBER LESS THAN ZERO!", NULL);
-		return;
+		//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "HECK!", "TILE NUMBER LESS THAN ZERO!", NULL);
+		//return;
+		tile = TileType::DEV1;
 	}
 	SDL_Rect srcrect = { pos_list[tile].x * TILESIZE, pos_list[tile].y * TILESIZE, TILESIZE, TILESIZE };
 	SDL_Rect dstrect = { position.x, position.y, TILESIZE, TILESIZE };

@@ -35,7 +35,22 @@ Point HuskyMath::addPointPoint(Point a, Point b)
     return { a.x + b.x, a.y + b.y };
 }
 
+Point HuskyMath::subPointPoint(Point a, Point b)
+{
+    return { a.x - b.x, a.y - b.y };
+}
+
 Point HuskyMath::addPointFloat(Point a, float b)
 {
     return { a.x + b, a.y + b };
+}
+
+Point HuskyMath::floorPoint(Point a)
+{
+    return { (float)floor(a.x), (float)floor(a.y) };
+}
+
+float HuskyMath::pointDotProduct(Point a, Point b)
+{
+    return a.x * b.x + a.y * b.y;
 }

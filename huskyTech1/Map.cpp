@@ -45,21 +45,28 @@ void Map::Render(Point offset)
 	if (offset.y * TILESIZE < 0) {
 		occluded_min.y = (int)(abs((int)offset.y) / TILESIZE);
 	}
-	if (((map_ground->getSizeX() - offset.x) * TILESIZE) > SCREEN_WIDTH) {
-		occluded_max.x = (SCREEN_WIDTH / TILESIZE) + occluded_min.x + 3; //add three just to make sure
+	if ((map_ground->getSizeX() * TILESIZE) + offset.x > SCREEN_WIDTH) {
+		occluded_max.x = HuskyMath::clamp((SCREEN_WIDTH / TILESIZE) + occluded_min.x + 3, 0, map_ground->getSizeX());
 	}
-	if (((map_ground->getSizeY() - offset.y) * TILESIZE) > SCREEN_HEIGHT) {
-		occluded_max.y = (SCREEN_HEIGHT / TILESIZE) + occluded_min.y + 3; //add three just to make sure
+	if ((map_ground->getSizeY() * TILESIZE) + offset.y > SCREEN_HEIGHT) {
+		occluded_max.y = HuskyMath::clamp((SCREEN_HEIGHT / TILESIZE) + occluded_min.y + 3, 0, map_ground->getSizeY());
 	}
 
 	//for debugging, make sure that occlusion culling works
 	//occluded_min = HuskyMath::addPointFloat(occluded_min, 1);
 	//occluded_max = HuskyMath::addPointFloat(occluded_max, -2);
 
+	
+
 	//draw the tiles
 	for (int i = occluded_min.x; i < occluded_max.x; i++) {
 		for (int j = occluded_min.y; j < occluded_max.y; j++) {
-			tile_ren->Draw(map_ground->get(i, j), { (i * TILESIZE) + offset.x, (j * TILESIZE) + offset.y });
+			if (i > map_ground->getSizeX() || j > map_ground->getSizeY() || i < 0 || j < 0) {
+				continue;
+			}
+			else {
+				tile_ren->Draw(map_ground->get(i, j), { (i * TILESIZE) + offset.x, (j * TILESIZE) + offset.y });
+			}
 		}
 	}
 }
