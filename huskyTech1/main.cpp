@@ -5,6 +5,7 @@
 //update code and stuff here
 
 
+
 void input_update() {
 	while (SDL_PollEvent(&e) != 0) {
 		switch (e.type) {
@@ -24,6 +25,10 @@ void input_update() {
 						explode();
 						break;
 
+					case SDLK_t:
+						dm = !dm;
+						break;
+
 					default:
 						handle_keyboard_movement(e, az_ch);
 						break;
@@ -38,9 +43,10 @@ void input_update() {
 
 
 void physics_update() {
+	camera->moveLerp(az_ch->GetPosition());
 
 	az_ch->PhysicsUpdate(deltaTime);
-
+	camera->physicsUpdate(deltaTime);
 }
 
 
@@ -55,7 +61,10 @@ void draw() {
 	//Clear screen
 	SDL_RenderClear(ht_renderer);
 
-	az_ch->Draw(ht_renderer);
+	if (dm)
+		mp->Render({ 0,0 });
+
+	az_ch->Draw(ht_renderer, camera);
 
 	//Update screen
 	SDL_RenderPresent(ht_renderer);
@@ -121,7 +130,7 @@ bool init() {
 	}
 	else {
 		//no issue
-		window = SDL_CreateWindow("husky tech 1", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(GAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 		if (window == NULL) {
 			return false;
@@ -135,11 +144,18 @@ bool init() {
 			else {
 				//init deltaTime
 				NOW = SDL_GetPerformanceCounter();
-				LAST = 0;
+				LAST = NOW;
+				NOW = SDL_GetPerformanceCounter();
 				deltaTime = 0;
+
+				//camera
+				camera = new Camera({ 0,0 });
 
 				//this is debug stuffz
 				az_ch = new Character(new Sprite("data/character_ss.png", ht_renderer, 4, 3), {25, 25});
+				tile_ren = new TileRenderer(ht_renderer, 1);
+				tile_ren->RegisterTexture(TileType::GRASS, "data/dev_t.png");
+				mp = new Map(camera, tile_ren, 100, 100);
 
 
 				alive = true;
@@ -153,6 +169,12 @@ bool init() {
 //deallocate sdl stuff
 void explode() {
 	alive = false; //make sure that the main loop doesn't continue
+
+	delete az_ch;
+	delete tile_ren;
+	delete mp;
+
+	delete camera;
 
 	IMG_Quit();
 

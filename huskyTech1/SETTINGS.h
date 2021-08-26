@@ -1,3 +1,8 @@
 #pragma once
 
-#define TILESIZE 64
+#define TILESIZE 24
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
+#define GAME "huskyTechS"

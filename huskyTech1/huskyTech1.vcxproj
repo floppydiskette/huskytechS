@@ -147,19 +147,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blendspace.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameMaster.cpp" />
     <ClCompile Include="HuskyMath.cpp" />
     <ClCompile Include="HuskySTD.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Tileset.cpp" />
+    <ClCompile Include="TileRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blendspace.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameMaster.h" />
@@ -168,11 +169,11 @@
     <ClInclude Include="HuskySTD.h" />
     <ClInclude Include="keybinds.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Room.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="SETTINGS.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="Tileset.h" />
+    <ClInclude Include="TileRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

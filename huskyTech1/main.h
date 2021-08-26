@@ -7,9 +7,11 @@
 #include "Character.h"
 #include "ht_types.h"
 #include "keybinds.h"
+#include "SETTINGS.h"
+#include "TileRenderer.h"
+#include "Map.h"
+#include "Camera.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
 
 bool alive = false;
 
@@ -17,9 +19,15 @@ SDL_Window* window = NULL;
 SDL_Renderer* ht_renderer = NULL;
 Uint64 NOW;
 Uint64 LAST;
-double deltaTime;
+double deltaTime = 0;
 
 Character* az_ch;
+TileRenderer* tile_ren;
+Map* mp;
+bool dm = true;
+
+Camera* camera;
+
 
 SDL_Event e;
 

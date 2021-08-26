@@ -21,13 +21,14 @@ void Character::PhysicsUpdate(double deltaTime)
 		Entity::SetVelocity(HuskyMath::point_lerp(Entity::GetVelocity(), { 0,0 }, ACCELERATION * deltaTime));
 	}
 
-	Entity::AddPosition(Entity::GetVelocity());
+	Entity::AddPosition(HuskyMath::mulPointFloat(Entity::GetVelocity(), deltaTime));
 }
 
 
-void Character::Draw(SDL_Renderer* renderer)
+void Character::Draw(SDL_Renderer* renderer, Camera* camera)
 {
-	ch_bs->Draw(renderer, input_vector, Entity::GetPosition(), delta_time);
+	Point pos = camera->getOffset(Entity::GetPosition());
+	ch_bs->Draw(renderer, input_vector, pos, delta_time);
 }
 
 

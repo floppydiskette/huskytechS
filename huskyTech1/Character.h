@@ -3,6 +3,7 @@
 #include "ht_types.h"
 #include "HuskyMath.h"
 #include "Blendspace.h"
+#include "Camera.h"
 
 
 class Character :
@@ -15,13 +16,13 @@ public:
 
     void PhysicsUpdate(double deltaTime);
 
-    void Draw(SDL_Renderer* renderer) override;
+    void Draw(SDL_Renderer* renderer, Camera* camera) override;
 
     void SetInputX(float x);
     void SetInputY(float y);
 
 private:
-    const float SPEED = 0.02;
+    const float SPEED = 120;
     const double ACCELERATION = 20;
 
     Point input_vector;

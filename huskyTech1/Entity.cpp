@@ -18,9 +18,10 @@ void Entity::Update()
 {
 }
 
-void Entity::Draw(SDL_Renderer* renderer)
+void Entity::Draw(SDL_Renderer* renderer, Camera* camera)
 {
-    en_sprite->renderAtScreenPos(renderer, position.x, position.y, 0, 0);
+    Point pos = camera->getOffset(position);
+    en_sprite->renderAtScreenPos(renderer, pos.x, pos.y, 0, 0);
 }
 
 void Entity::SetPosition(Point pos)

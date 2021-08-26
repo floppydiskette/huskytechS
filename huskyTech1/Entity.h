@@ -3,6 +3,7 @@
 #include "ht_types.h"
 #include "HuskyMath.h"
 #include "Sprite.h"
+#include "Camera.h"
 
 class Entity
 {
@@ -13,7 +14,7 @@ public:
 
 	virtual void Update();
 
-	virtual void Draw(SDL_Renderer* renderer);
+	virtual void Draw(SDL_Renderer* renderer, Camera* camera);
 
 	virtual void SetPosition(Point pos);
 

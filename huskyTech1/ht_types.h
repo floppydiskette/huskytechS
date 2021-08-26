@@ -2,5 +2,12 @@
 #include "Sprite.h"
 
 struct Point {
-	float x, y;
+	float x = 0;
+	float y = 0;
+};
+
+//unsafe, but ehh heck it (:
+enum TileType {
+	GRASS = 0,
+	STONE = 1
 };
