@@ -18,6 +18,7 @@ bool alive = false;
 
 SDL_Window* window = NULL;
 SDL_Renderer* ht_renderer = NULL;
+SDL_Texture* render_tex;
 Uint64 NOW;
 Uint64 LAST;
 double deltaTime = 0;

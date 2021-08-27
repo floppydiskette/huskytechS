@@ -1,5 +1,5 @@
 #pragma once
-#include "Perlin.h"
+#include "PerlinNoise.hpp"
 #include "Map.h"
 #include "Camera.h"
 #include "TileRenderer.h"

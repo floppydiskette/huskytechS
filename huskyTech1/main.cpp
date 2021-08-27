@@ -58,13 +58,21 @@ void update() {
 
 
 void draw() {
-	//Clear screen
+	//set target to render texture
+	SDL_SetRenderTarget(ht_renderer, render_tex);
 	SDL_RenderClear(ht_renderer);
+	//render stuff to the texture
 
 	if (dm)
 		mp->Render({ 0,0 });
 
 	az_ch->Draw(ht_renderer, camera);
+
+	//set target to screen
+	SDL_SetRenderTarget(ht_renderer, NULL);
+	SDL_RenderClear(ht_renderer);
+
+	SDL_RenderCopy(ht_renderer, render_tex, NULL, NULL);
 
 	//Update screen
 	SDL_RenderPresent(ht_renderer);
@@ -130,7 +138,7 @@ bool init() {
 	}
 	else {
 		//no issue
-		window = SDL_CreateWindow(GAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(GAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
 
 		if (window == NULL) {
 			return false;
@@ -148,15 +156,18 @@ bool init() {
 				NOW = SDL_GetPerformanceCounter();
 				deltaTime = 0;
 
+				render_tex = SDL_CreateTexture(ht_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, SCREEN_WIDTH, SCREEN_HEIGHT);
+
 				//camera
-				camera = new Camera({ 0,0 });
+				camera = new Camera({ (WORLD_SIZE_X / 2) * TILESIZE, (WORLD_SIZE_Y / 2) * TILESIZE });
 
 				//this is debug stuffz
-				az_ch = new Character(new Sprite("data/character_ss.png", ht_renderer, 4, 3), {50 * TILESIZE, 50 * TILESIZE});
+				az_ch = new Character(new Sprite("data/character_ss.png", ht_renderer, 4, 3), {(WORLD_SIZE_X / 2) * TILESIZE, (WORLD_SIZE_Y / 2) * TILESIZE});
 				tile_ren = new TileRenderer(ht_renderer, 4);
 				tile_ren->RegisterTexture(TileType::GRASS, "data/grass_t.png");
+				tile_ren->RegisterTexture(TileType::SAND, "data/dev0_t.png");
+				tile_ren->RegisterTexture(TileType::WATER, "data/dev1_t.png");
 				tile_ren->RegisterTexture(TileType::STONE, "data/stone_t.png");
-				tile_ren->RegisterTexture(TileType::DEV1, "data/dev_t.png");
 				mp = MapGenerator::generateMap(camera, tile_ren);
 
 

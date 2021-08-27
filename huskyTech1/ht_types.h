@@ -9,7 +9,7 @@ struct Point {
 //unsafe, but ehh heck it (:
 enum TileType {
 	GRASS = 0,
-	STONE = 1,
-	DEV1 = 2,
-	DEV2 = 3,
+	SAND = 1,
+	WATER = 2,
+	STONE = 3,
 };

@@ -2,13 +2,13 @@
 
 Camera::Camera(Point pos)
 {
-	position = pos;
+	position = HuskyMath::mulPointFloat(pos, -1);
 }
 
 void Camera::moveInstant(Point targ)
 {
 	lerping = false;
-	position = targ;
+	position = HuskyMath::mulPointFloat(targ, -1);
 }
 
 void Camera::moveLerp(Point targ)

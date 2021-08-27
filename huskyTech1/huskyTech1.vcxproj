@@ -93,6 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -175,6 +176,7 @@
     <ClInclude Include="MapGenerator.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Perlin.h" />
+    <ClInclude Include="PerlinNoise.hpp" />
     <ClInclude Include="SETTINGS.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TileRenderer.h" />

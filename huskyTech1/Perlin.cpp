@@ -81,28 +81,21 @@ double Perlin::fade(double t)
     return t * t * t * (t * (t * 6 - 15) + 10); //haha stealing ur code ken perlin (:<
 }
 
-double Perlin::grad(int hash, Point pos)
-{
-    switch (hash & 0xF)
-    {
-    case 0x0: return  pos.x + pos.y;
-    case 0x1: return -pos.x + pos.y;
-    case 0x2: return  pos.x - pos.y;
-    case 0x3: return -pos.x - pos.y;
-    case 0x4: return  pos.x + const_z;
-    case 0x5: return -pos.x + const_z;
-    case 0x6: return  pos.x - const_z;
-    case 0x7: return -pos.x - const_z;
-    case 0x8: return  pos.y + const_z;
-    case 0x9: return -pos.y + const_z;
-    case 0xA: return  pos.y - const_z;
-    case 0xB: return -pos.y - const_z;
-    case 0xC: return  pos.y + pos.x;
-    case 0xD: return -pos.y + const_z;
-    case 0xE: return  pos.y - pos.x;
-    case 0xF: return -pos.y - const_z;
-    default: return 0; // never happens
-    }
+double Perlin::grad(int hash, Point pos) {
+    int h = hash & 15;                                    // Take the hashed value and take the first 4 bits of it (15 == 0b1111)
+    double u = h < 8 /* 0b1000 */ ? pos.x : pos.y;                // If the most significant bit (MSB) of the hash is 0 then set u = x.  Otherwise y.
+
+    double v;                                             // In Ken Perlin's original implementation this was another conditional operator (?:).  I
+                                                          // expanded it for readability.
+
+    if (h < 4 /* 0b0100 */)                                // If the first and second significant bits are 0 set v = y
+        v = pos.y;
+    else if (h == 12 /* 0b1100 */ || h == 14 /* 0b1110*/)  // If the first and second significant bits are 1 set v = x
+        v = pos.x;
+    else                                                  // If the first and second significant bits are not equal (0/1, 1/0) set v = z
+        v = const_z;
+
+    return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v); // Use the last 2 bits to decide if u and v are positive or negative.  Then return their addition.
 }
 
 int Perlin::inc(int num)
