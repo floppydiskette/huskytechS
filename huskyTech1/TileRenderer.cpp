@@ -39,7 +39,7 @@ void TileRenderer::RegisterTexture(TileType tile, const char* filename)
 
 	Point send_to = HuskySTD::getPointFromRectInt(tile, atlas_size);
 	pos_list[tile] = send_to;
-	SDL_Rect dstrect = { send_to.x * TILESIZE, send_to.y * TILESIZE, TILESIZE, TILESIZE };
+	SDL_Rect dstrect = { static_cast<int>(send_to.x) * TILESIZE, static_cast<int>(send_to.y) * TILESIZE, TILESIZE, TILESIZE };
 	SDL_RenderCopy(ht_renderer, tmp_tex, NULL, &dstrect);
 	
 	SDL_SetRenderTarget(ht_renderer, NULL);
@@ -61,8 +61,8 @@ void TileRenderer::Draw(TileType tile, Point position)
 		return;
 		//tile = TileType::DEV1;
 	}
-	SDL_Rect srcrect = { pos_list[tile].x * TILESIZE, pos_list[tile].y * TILESIZE, TILESIZE, TILESIZE };
-	SDL_Rect dstrect = { position.x, position.y, TILESIZE, TILESIZE };
+	SDL_Rect srcrect = { static_cast<int>(pos_list[tile].x) * TILESIZE, static_cast<int>(pos_list[tile].y) * TILESIZE, TILESIZE, TILESIZE };
+	SDL_Rect dstrect = { static_cast<int>(position.x), static_cast<int>(position.y), TILESIZE, TILESIZE };
 
 	SDL_RenderCopy(ht_renderer, tile_atlas, &srcrect, &dstrect);
 }

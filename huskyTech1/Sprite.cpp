@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "Sprite.h"
 
 Sprite::Sprite(const char* filename, SDL_Renderer* renderer, int rows, int cols)
 {

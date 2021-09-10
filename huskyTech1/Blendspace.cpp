@@ -3,9 +3,17 @@
 Blendspace::Blendspace(Sprite* spr, int udlr[4], int steporder[3], float framesps)
 {
 	sprite = spr;
+	#ifdef __STDC_LIB_EXT1__
 	memcpy_s(udlro, 4 * sizeof(int), udlr, 4 * sizeof(int));
+	#else
+	memcpy(udlro, udlr, 4 * sizeof(int));
+	#endif
 	int tmp[4] = { steporder[0], steporder[1], steporder[0], steporder[2] };
+	#ifdef __STDC_LIB_EXT1__
 	memcpy_s(sorder, 4 * sizeof(int), tmp, 4 * sizeof(int));
+	#else
+	memcpy(sorder, tmp, 4 * sizeof(int));
+	#endif
 	fps = framesps;
 }
 

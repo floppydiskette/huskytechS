@@ -32,7 +32,7 @@ void Map::Render(Point offset)
 	offset = cam->getOffset(offset);
 	//this is the area of the map that we will draw
 	Point occluded_min = { 0,0 };
-	Point occluded_max = { map_ground->getSizeX(), map_ground->getSizeY() };
+	Point occluded_max = { static_cast<float>(map_ground->getSizeX()), static_cast<float>(map_ground->getSizeY()) };
 
 
 	//occlusion culling
