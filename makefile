@@ -13,6 +13,8 @@ LIBS_PARAMS=$(LIBS:%=-l%)
 
 HTS_I=huskyTech1/
 
+HTS_D=huskyTech1/data/
+
 HTS_S=$(wildcard huskyTech1/*.cpp)
 
 HTS_O := $(patsubst %.cpp,%.o,$(HTS_S))
@@ -24,6 +26,7 @@ LDIR=$(SDL_L) $(IMG_L)
 LDIR_PARAMS=$(LDIR:%=-L%)
 
 huskytch: $(HTS_O)
+	cp -r $(HTS_D) ./data/
 	$(CC) -std=c++17 -o $@ $^ $(INC_PARAMS) $(LDIR_PARAMS) $(LIBS_PARAMS)
 
 %.o: %.cpp
@@ -31,3 +34,5 @@ huskytch: $(HTS_O)
 
 clean:
 	rm -rf $(TARGET) huskyTech1/*.o
+remove:
+	rm -rf ./data/
