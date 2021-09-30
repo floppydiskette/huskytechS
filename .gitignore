@@ -335,3 +335,6 @@ ASALocalRun/
 
 #don't upload copied data folder after build on *nix
 data/
+
+#
+huskytch
