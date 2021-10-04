@@ -338,3 +338,6 @@ data/
 
 #
 huskytch
+
+#why wasn't this here before what
+*.o
