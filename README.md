@@ -1,6 +1,6 @@
-# huskytech1
+# huskytechS
  cool game engine, very epic and cool
 
 
-to compile with makefile, you may need to edit some variables in makefile
-it was originally written with macos and sdl installed via homebrew in mind
+compile should work fine with cmake, although it was made with clion in mind  
+also make sure to run with working directory set to huskytechS (folder of README.md) as the data folder is required to run the game
