@@ -15,13 +15,13 @@ void Character::PhysicsUpdate(double deltaTime)
 	//az_en->SetPosition({ az_en->GetPosition().x + (az_en->velocity.x * speed * (float)deltaTime), az_en->GetPosition().y + (az_en->velocity.y * speed * (float)deltaTime) });
 
 	if (!HuskyMath::arePointSame(input_vector, { 0,0 })) {
-		Entity::SetVelocity(HuskyMath::point_lerp(Entity::GetVelocity(), HuskyMath::mulPointFloat(input_vector, SPEED), ACCELERATION * (1+deltaTime)));
+		Entity::SetVelocity(HuskyMath::point_lerp(Entity::GetVelocity(), HuskyMath::mulPointFloat(input_vector, SPEED), ACCELERATION * (deltaTime)));
 	}
 	else {
-		Entity::SetVelocity(HuskyMath::point_lerp(Entity::GetVelocity(), { 0,0 }, ACCELERATION * (1+deltaTime)));
+		Entity::SetVelocity(HuskyMath::point_lerp(Entity::GetVelocity(), { 0,0 }, ACCELERATION * (deltaTime)));
 	}
 
-	Entity::AddPosition(HuskyMath::mulPointFloat(Entity::GetVelocity(), (1+deltaTime)));
+	Entity::AddPosition(HuskyMath::mulPointFloat(Entity::GetVelocity(), (deltaTime)));
 }
 
 

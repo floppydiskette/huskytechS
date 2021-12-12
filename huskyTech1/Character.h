@@ -22,8 +22,8 @@ public:
     void SetInputY(float y);
 
 private:
-    const float SPEED = .5;
-    const double ACCELERATION = .02;
+    const float SPEED = 100;
+    const double ACCELERATION = 50;
 
     Point input_vector;
     double delta_time;

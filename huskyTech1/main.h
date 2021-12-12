@@ -12,6 +12,7 @@
 #include "Map.h"
 #include "Camera.h"
 #include "MapGenerator.h"
+#include "HuskyMath.h"
 
 
 bool alive = false;
@@ -22,6 +23,8 @@ SDL_Texture* render_tex;
 Uint64 NOW;
 Uint64 LAST;
 double deltaTime = 0;
+Point mouse_pos;
+uint32_t mouse_state;
 
 Character* az_ch;
 TileRenderer* tile_ren;

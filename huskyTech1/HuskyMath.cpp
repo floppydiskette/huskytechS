@@ -1,5 +1,26 @@
 #include "HuskyMath.h"
 
+float HuskyMath::min(float a, float b)
+{
+    return a < b ? a : b;
+}
+
+float HuskyMath::max(float a, float b)
+{
+    return a > b ? a : b;
+}
+
+// only ever used for calculating mouse position
+Point HuskyMath::clamp_point(Point value, Point min, Point max)
+{
+    Point result = value;
+    result.x = (result.x > max.x)? max.x : result.x;
+    result.x = (result.x < min.x)? min.x : result.x;
+    result.y = (result.y > max.y)? max.y : result.y;
+    result.y = (result.y < min.y)? min.y : result.y;
+    return result;
+}
+
 float HuskyMath::clamp(float n, float lower, float upper)
 {
     return std::max(lower, std::min(n, upper));

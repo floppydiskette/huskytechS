@@ -1,10 +1,21 @@
 #include "main.h"
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 
 
 //update code and stuff here
 
-
+void handle_mouse(float scale, int w, int h) {
+    int x,y;
+    mouse_state = SDL_GetMouseState(&x,&y);
+    Point virtualMouse = { 0 };
+    virtualMouse.x = (mouse_pos.x - (w - (WINDOW_WIDTH*scale))*0.5f)/scale;
+    virtualMouse.y = (mouse_pos.y - (h - (WINDOW_HEIGHT*scale))*0.5f)/scale;
+    virtualMouse = HuskyMath::clamp_point(virtualMouse, (Point){ 0, 0 }, (Point){ (float)WINDOW_WIDTH, (float)WINDOW_HEIGHT });
+    mouse_pos = virtualMouse;
+}
 
 void input_update() {
 	while (SDL_PollEvent(&e) != 0) {
@@ -57,7 +68,8 @@ void update() {
 
 
 
-void draw() {
+void draw(float scale, int w, int h) {
+
 	//set target to render texture
 	SDL_SetRenderTarget(ht_renderer, render_tex);
 	SDL_RenderClear(ht_renderer);
@@ -72,7 +84,11 @@ void draw() {
 	SDL_SetRenderTarget(ht_renderer, NULL);
 	SDL_RenderClear(ht_renderer);
 
-	SDL_RenderCopy(ht_renderer, render_tex, NULL, NULL);
+    SDL_Rect src = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    SDL_Rect dst = { (int)((w - ((float)SCREEN_WIDTH*scale))*0.5f), (int)((h - (SCREEN_HEIGHT*scale))*0.5f),
+                     (int)(SCREEN_WIDTH*scale), (int)(SCREEN_HEIGHT*scale) };
+
+	SDL_RenderCopy(ht_renderer, render_tex, &src, &dst);
 
 	//Update screen
 	SDL_RenderPresent(ht_renderer);
@@ -106,9 +122,19 @@ int main(int argc, char* args[]) {
 		
 		//program ready, let's start running the code
 		while (alive) {
+            SDL_PumpEvents();
 			LAST = NOW;
 			NOW = SDL_GetPerformanceCounter();
-			deltaTime = ((NOW - LAST) / (double)SDL_GetPerformanceFrequency());
+			deltaTime = ((NOW - LAST)*1000 / (double)SDL_GetPerformanceFrequency())*0.001;
+
+            // first of everything, handle window scale
+            int w, h;
+            SDL_GetWindowSize(window, &w, &h);
+
+            float scale = HuskyMath::min((float)w/SCREEN_WIDTH, (float)h/SCREEN_HEIGHT);
+
+            // handle mouse
+            handle_mouse(scale, w, h);
 
 			input_update();
 
@@ -119,7 +145,7 @@ int main(int argc, char* args[]) {
 
 			update();
 
-			draw();
+			draw(scale, w, h);
 		}
 
 	}
@@ -138,7 +164,7 @@ bool init() {
 	}
 	else {
 		//no issue
-		window = SDL_CreateWindow(GAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow(GAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
 		if (window == NULL) {
 			return false;

@@ -5,7 +5,11 @@
 class HuskyMath
 {
 public:
+    static float min(float a, float b);
+    static float max(float a, float b);
+
 	static float clamp(float n, float lower, float upper);
+    static Point clamp_point(Point p, Point lower, Point upper);
 	static float lerp(float v0, float v1, float t);
 
 	static Point point_lerp(Point v0, Point v1, float t);
