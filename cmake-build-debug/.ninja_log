@@ -1,0 +1,14 @@
+# ninja log v5
+0	274	1639304902399708881	CMakeFiles/huskyTechS.dir/huskyTech1/Sprite.cpp.o	d09e652112ff8581
+1	382	1639304934723768951	CMakeFiles/huskyTechS.dir/huskyTech1/Entity.cpp.o	b4e437b3c3590574
+1	374	1639304902499709068	CMakeFiles/huskyTechS.dir/huskyTech1/TileRenderer.cpp.o	19a520826f849c68
+0	12	1639304955179806962	build.ninja	b27fe78564ac6ae8
+0	381	1639304902507709084	CMakeFiles/huskyTechS.dir/huskyTech1/Map.cpp.o	4bc5f595a452e682
+1	389	1639304934731768965	CMakeFiles/huskyTechS.dir/huskyTech1/HuskyMath.cpp.o	832ee624d98e563
+1	542	1639304934887769255	CMakeFiles/huskyTechS.dir/huskyTech1/MapGenerator.cpp.o	84ab8d55d9341583
+0	374	1639304902499709068	CMakeFiles/huskyTechS.dir/huskyTech1/Character.cpp.o	9fdacd35d05eccd2
+0	617	1639304812403541643	CMakeFiles/huskyTechS.dir/huskyTech1/main.cpp.o	ce8e6aa2686038ea
+1	359	1639304850879613142	CMakeFiles/huskyTechS.dir/huskyTech1/Camera.cpp.o	77c018f6e5ce22f0
+1	369	1639304955879808264	CMakeFiles/huskyTechS.dir/huskyTech1/Blendspace.cpp.o	9ed73813dfda49c4
+1	376	1639304955883808272	CMakeFiles/huskyTechS.dir/huskyTech1/HuskySTD.cpp.o	5d4e9485bd21f1fa
+376	412	1639304955919808337	huskyTechS	367b881b2628b418
